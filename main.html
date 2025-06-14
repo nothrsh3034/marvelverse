@@ -1,0 +1,1437 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MarvelVerse - Enter the Ultimate Marvel Universe</title>
+    <style>
+      :root {
+        /* Default Marvel colors */
+        --marvel-red: #ed1d24;
+        --marvel-blue: #037ef3;
+        --marvel-yellow: #f7d417;
+        --marvel-black: #000000;
+        --marvel-white: #ffffff;
+
+        /* Character theme colors */
+        --ironman-primary: #c20e0a;
+        --ironman-secondary: #f8c300;
+        --ironman-tertiary: #4a4a4a;
+
+        --thor-primary: #2c8c41;
+        --thor-secondary: #d4af37;
+        --thor-tertiary: #8b0000;
+
+        --cap-primary: #171af2;
+        --cap-secondary: #efe6e9;
+        --cap-tertiary: #be0808;
+
+        --spiderman-primary: #e61610;
+        --spiderman-secondary: #1d00f8;
+        --spiderman-tertiary: #080101;
+
+        --doom-primary: #006b3c;
+        --doom-secondary: #00a1e0;
+        --doom-tertiary: #8b0000;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        padding: 0;
+        font-family: "Bangers", cursive, sans-serif;
+        background-color: var(--marvel-black);
+        color: var(--marvel-white);
+        background-image: url("comic-bg-texture.png");
+        transition: all 0.5s ease;
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      /* Character Themes */
+      body.ironman-theme {
+        --marvel-red: var(--ironman-primary);
+        --marvel-yellow: var(--ironman-secondary);
+        --marvel-blue: var(--ironman-tertiary);
+        background-image: linear-gradient(
+            to bottom,
+            rgba(196, 30, 26, 0.2),
+            rgba(0, 0, 0, 0.9)
+          ),
+          url("comic-bg-texture.png");
+      }
+
+      body.thor-theme {
+        --marvel-red: var(--thor-primary);
+        --marvel-yellow: var(--thor-secondary);
+        --marvel-blue: var(--thor-tertiary);
+        background-image: linear-gradient(
+            to bottom,
+            rgba(44, 140, 65, 0.2),
+            rgba(0, 0, 0, 0.9)
+          ),
+          url("comic-bg-texture.png");
+      }
+
+      body.captain-theme {
+        --marvel-red: var(--cap-primary);
+        --marvel-yellow: var(--cap-secondary);
+        --marvel-blue: var(--cap-tertiary);
+        background-image: linear-gradient(
+            to bottom,
+            rgba(23, 26, 242, 0.2),
+            rgba(0, 0, 0, 0.9)
+          ),
+          url("comic-bg-texture.png");
+      }
+
+      body.spiderman-theme {
+        --marvel-red: var(--spiderman-primary);
+        --marvel-yellow: var(--spiderman-secondary);
+        --marvel-blue: var(--spiderman-tertiary);
+        background-image: linear-gradient(
+            to bottom,
+            rgba(230, 22, 16, 0.2),
+            rgba(0, 0, 0, 0.9)
+          ),
+          url("comic-bg-texture.png");
+      }
+
+      body.doom-theme {
+        --marvel-red: var(--doom-primary);
+        --marvel-yellow: var(--doom-secondary);
+        --marvel-blue: var(--doom-tertiary);
+        background-image: linear-gradient(
+            to bottom,
+            rgba(0, 107, 60, 0.2),
+            rgba(0, 0, 0, 0.9)
+          ),
+          url("comic-bg-texture.png");
+      }
+
+      .comic-border {
+        border: 4px solid var(--marvel-red);
+        border-radius: 0;
+        box-shadow: 8px 8px 0 var(--marvel-blue),
+          16px 16px 0 var(--marvel-yellow);
+      }
+
+      header {
+        background-color: var(--marvel-red);
+        padding: 20px;
+        text-align: center;
+        position: relative;
+        border-bottom: 5px solid var(--marvel-yellow);
+      }
+
+      .logo {
+        font-size: 4rem;
+        color: var(--marvel-white);
+        text-shadow: 4px 4px 0 var(--marvel-blue), 8px 8px 0 var(--marvel-black);
+        letter-spacing: 2px;
+        margin: 0;
+      }
+
+      .tagline {
+        font-size: 1.5rem;
+        color: var(--marvel-yellow);
+        text-shadow: 2px 2px 0 var(--marvel-black);
+        margin-top: 10px;
+      }
+
+      .main-nav {
+        display: flex;
+        justify-content: center;
+        background-color: var(--marvel-blue);
+        padding: 15px;
+        gap: 20px;
+        flex-wrap: wrap;
+      }
+
+      .nav-item {
+        color: var(--marvel-white);
+        text-decoration: none;
+        font-size: 1.2rem;
+        padding: 5px 15px;
+        border: 2px solid var(--marvel-white);
+        transition: all 0.3s;
+        cursor: pointer;
+      }
+
+      .nav-item:hover {
+        background-color: var(--marvel-yellow);
+        color: var(--marvel-black);
+        transform: rotate(-5deg) scale(1.1);
+      }
+
+      .hero-section {
+        padding: 40px;
+        text-align: center;
+        background: linear-gradient(
+          135deg,
+          var(--marvel-red),
+          var(--marvel-blue)
+        );
+        margin: 30px;
+        position: relative;
+      }
+
+      .hero-section::before {
+        content: "POW!";
+        position: absolute;
+        font-size: 8rem;
+        color: rgba(255, 255, 255, 0.1);
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        z-index: 0;
+      }
+
+      .hero-title {
+        font-size: 3rem;
+        color: var(--marvel-yellow);
+        text-shadow: 3px 3px 0 var(--marvel-black);
+        position: relative;
+        z-index: 1;
+      }
+
+      .comic-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+        gap: 30px;
+        padding: 30px;
+      }
+
+      .comic-card {
+        background-color: var(--marvel-white);
+        border: 3px solid var(--marvel-yellow);
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+      }
+
+      /* Character-specific hover effects */
+      .ironman-comic:hover {
+        box-shadow: 0 10px 200px rgba(185, 7, 4, 0.8);
+      }
+
+      .thor-comic:hover {
+        box-shadow: 0 10px 200px rgba(44, 140, 65, 0.8);
+      }
+
+      .captain-comic:hover {
+        box-shadow: 0 10px 200px rgba(6, 10, 244, 0.8);
+      }
+
+      .spiderman-comic:hover {
+        box-shadow: 0 10px 200px rgba(252, 43, 36, 0.867);
+      }
+
+      .doom-comic:hover {
+        box-shadow: 0 10px 200px rgba(0, 131, 74, 0.8);
+      }
+      .infinity-saga-comics:hover {
+        box-shadow: 0 10px 200px rgba(243, 243, 12, 0.8);
+      }
+      .multiversal-saga-comic:hover {
+        box-shadow: 0 10px 200px rgba(87, 1, 109, 0.942);
+      }
+
+      .character-card,
+      .series-card {
+        background-color: var(--marvel-white);
+        border: 3px solid var(--marvel-yellow);
+        transition: all 0.3s;
+        position: relative;
+        overflow: hidden;
+        cursor: pointer;
+        text-align: center;
+      }
+
+      .character-card:hover {
+        transform: translateY(-10px) rotate(2deg);
+        box-shadow: 0 10px 150px rgba(246, 238, 10, 0.886);
+      }
+
+      .series-card:hover {
+        transform: translateY(-10px) rotate(2deg);
+        box-shadow: 0 10px 400px rgba(81, 3, 105, 0.886);
+      }
+
+      /* Fixed image fitting */
+      .comic-cover {
+        width: 100%;
+        height: 350px;
+        object-fit: contain;
+        background-color: black;
+        border-bottom: 3px solid var(--marvel-red);
+      }
+
+      .character-image,
+      .series-image {
+        width: 100%;
+        height: 350px;
+        object-fit: cover;
+        border-bottom: 3px solid var(--marvel-red);
+      }
+
+      .comic-info {
+        padding: 15px;
+        background-color: var(--marvel-white);
+      }
+
+      .comic-title {
+        font-size: 1.3rem;
+        color: var(--marvel-black);
+        margin: 0 0 10px 0;
+        font-weight: bold;
+      }
+
+      .character-title,
+      .series-title {
+        font-size: 1.8rem;
+        color: var(--marvel-black);
+        margin: 0 0 10px 0;
+        font-weight: bold;
+        padding: 15px;
+      }
+
+      .comic-meta {
+        color: var(--marvel-blue);
+        font-size: 0.9rem;
+        margin: 5px 0;
+      }
+
+      .comic-badge {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background-color: var(--marvel-yellow);
+        color: var(--marvel-black);
+        padding: 5px 10px;
+        font-weight: bold;
+        transform: rotate(15deg);
+      }
+
+      footer {
+        background-color: var(--marvel-black);
+        color: var(--marvel-white);
+        text-align: center;
+        padding: 20px;
+        border-top: 5px solid var(--marvel-red);
+        margin-top: auto;
+      }
+
+      @keyframes float {
+        0% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-10px);
+        }
+        100% {
+          transform: translateY(0px);
+        }
+      }
+
+      .floating {
+        animation: float 5s ease-in-out infinite;
+      }
+
+      .hidden {
+        display: none;
+      }
+
+      .back-button {
+        background-color: var(--marvel-red);
+        color: var(--marvel-white);
+        border: none;
+        padding: 10px 20px;
+        font-family: "Bangers", cursive;
+        font-size: 1.2rem;
+        margin: 20px;
+        cursor: pointer;
+        border: 2px solid var(--marvel-yellow);
+      }
+
+      .back-button:hover {
+        background-color: var(--marvel-yellow);
+        color: var(--marvel-black);
+      }
+
+      /* About Section */
+      .about-section {
+        padding: 40px;
+        margin: 30px;
+        background-color: rgba(0, 0, 0, 0.7);
+        border: 3px solid var(--marvel-red);
+      }
+
+      .about-section h2 {
+        color: var(--marvel-yellow);
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .about-section p {
+        color: var(--marvel-white);
+        font-size: 1.2rem;
+        line-height: 1.6;
+        text-align: center;
+      }
+
+      /* Contact Section */
+      .contact-section {
+        padding: 40px;
+        margin: 30px;
+        background-color: rgba(0, 0, 0, 0.7);
+        border: 3px solid var(--marvel-red);
+      }
+
+      .contact-section h2 {
+        color: var(--marvel-yellow);
+        font-size: 2.5rem;
+        text-align: center;
+        margin-bottom: 20px;
+      }
+
+      .contact-form {
+        display: flex;
+        flex-direction: column;
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .form-group {
+        margin-bottom: 20px;
+      }
+
+      .form-group label {
+        display: block;
+        color: var(--marvel-yellow);
+        margin-bottom: 5px;
+        font-size: 1.2rem;
+      }
+
+      .form-group input,
+      .form-group textarea {
+        width: 100%;
+        padding: 10px;
+        font-family: "Bangers", cursive;
+        font-size: 1.1rem;
+        background-color: rgba(255, 255, 255, 0.9);
+        border: 2px solid var(--marvel-yellow);
+      }
+
+      .form-group textarea {
+        height: 150px;
+      }
+
+      .submit-btn {
+        background-color: var(--marvel-red);
+        color: var(--marvel-white);
+        border: none;
+        padding: 15px;
+        font-family: "Bangers", cursive;
+        font-size: 1.3rem;
+        cursor: pointer;
+        border: 2px solid var(--marvel-yellow);
+        transition: all 0.3s;
+      }
+
+      .submit-btn:hover {
+        background-color: var(--marvel-yellow);
+        color: var(--marvel-black);
+      }
+
+      /* Responsive adjustments */
+      @media (max-width: 768px) {
+        .logo {
+          font-size: 2.5rem;
+        }
+
+        .tagline {
+          font-size: 1.2rem;
+        }
+
+        .main-nav {
+          gap: 10px;
+          padding: 10px;
+        }
+
+        .nav-item {
+          font-size: 5rem;
+          padding: 3px 10px;
+        }
+
+        .hero-section {
+          padding: 20px;
+          margin: 15px;
+        }
+
+        .hero-title {
+          font-size: 2rem;
+        }
+
+        .comic-grid {
+          grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+          gap: 20px;
+          padding: 20px;
+        }
+      }
+    </style>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bangers&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="comic-border">
+      <h1 class="logo">MARVELVERSE</h1>
+      <p class="tagline">Enter the Ultimate Marvel Universe</p>
+    </header>
+
+    <nav class="main-nav">
+      <a href="#" class="nav-item" id="home">HOME</a>
+      <a href="#" class="nav-item" id="characters">CHARACTERS</a>
+      <a href="#" class="nav-item" id="series">SERIES</a>
+      <a href="#" class="nav-item" id="about">ABOUT</a>
+      <a href="#" class="nav-item" id="contact">CONTACT</a>
+    </nav>
+
+    <!-- Home Section -->
+    <section id="home-section">
+      <section class="hero-section comic-border">
+        <h2 class="hero-title">THIS WEEK'S HOTTEST COMICS!</h2>
+      </section>
+
+      <div class="comic-grid" id="featured-comics">
+        <!--Comic 1-->
+        <div class="comic-card floating">
+          <span class="comic-badge">NEW!</span>
+          <img
+            src="images/Avengers.jpg"
+            alt="Comic Cover"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Avengers Diassembled</h3>
+            <p class="comic-meta">Written by Nick Spencer</p>
+            <p class="comic-meta">Art by Mark Bagley</p>
+          </div>
+        </div>
+
+        <!--Comic 2-->
+        <div class="comic-card floating">
+          <img
+            src="images/Dr. Doom.jpg"
+            alt="Comic Cover"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Doctor Doom v02 - Bedford Falls (2021)</h3>
+            <p class="comic-meta">Written by Jason Aaron</p>
+            <p class="comic-meta">Art by Ed McGuinness</p>
+          </div>
+        </div>
+
+        <!-- Comic 3 -->
+        <div class="comic-card floating">
+          <span class="comic-badge">BESTSELLER</span>
+          <img
+            src="images/Avengers Infinity Gauntlet.jpg"
+            alt="Comic Cover"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Avengers Infinity Gauntlet</h3>
+            <p class="comic-meta">Written by Jonathan Hickman</p>
+            <p class="comic-meta">Art by Leinil Francis Yu</p>
+          </div>
+        </div>
+
+        <!-- Comic 4 -->
+        <div class="comic-card floating">
+          <img
+            src="images/Fantastic Four By Mark Waid and Mike Wieringo.jpg"
+            alt="Comic Cover"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">
+              Fantastic Four By Mark Waid and Mike Wieringo
+            </h3>
+            <p class="comic-meta">Written by Donny Cates</p>
+            <p class="comic-meta">Art by Nic Klein</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Characters Section -->
+    <section id="characters-section" class="hidden">
+      <button class="back-button" id="back-to-home-from-characters">
+        BACK TO HOME
+      </button>
+      <section class="hero-section comic-border">
+        <h2 class="hero-title">POPULAR CHARACTERS</h2>
+      </section>
+
+      <div class="comic-grid" id="characters-grid">
+        <!-- Iron Man -->
+        <div class="character-card floating" id="iron-man">
+          <img
+            src="images/iron man cover.webp"
+            alt="Iron Man"
+            class="character-image"
+          />
+          <div class="character-title">IRON MAN</div>
+        </div>
+
+        <!-- Thor -->
+        <div class="character-card floating" id="thor">
+          <img
+            src="images/thor-cover2.webp"
+            alt="Thor"
+            class="character-image"
+          />
+          <div class="character-title">THOR</div>
+        </div>
+
+        <!-- Captain America -->
+        <div class="character-card floating" id="captain-america">
+          <img
+            src="images/captain-cover2.webp"
+            alt="Captain America"
+            class="character-image"
+          />
+          <div class="character-title">CAPTAIN AMERICA</div>
+        </div>
+
+        <!-- Spider-Man -->
+        <div class="character-card floating" id="spider-man">
+          <img
+            src="images/spiderman cover.jpg"
+            alt="Spider-Man"
+            class="character-image"
+          />
+          <div class="character-title">SPIDER-MAN</div>
+        </div>
+
+        <!-- Doctor Doom -->
+        <div class="character-card floating" id="doctor-doom">
+          <img
+            src="images/dr doom cover.jpg"
+            alt="Doctor Doom"
+            class="character-image"
+          />
+          <div class="character-title">DOCTOR DOOM</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Series Section -->
+    <section id="series-section" class="hidden">
+      <button class="back-button" id="back-to-home-from-series">
+        BACK TO HOME
+      </button>
+      <section class="hero-section comic-border">
+        <h2 class="hero-title">EPIC MARVEL SERIES</h2>
+      </section>
+
+      <div class="comic-grid" id="series-grid">
+        <!-- Infinity Saga -->
+        <div class="series-card floating" id="infinity-saga">
+          <img
+            src="images/infinity-saga.jpeg"
+            alt="Infinity Saga"
+            class="series-image"
+          />
+          <div class="series-title">INFINITY SAGA</div>
+        </div>
+
+        <!-- Multiversal Saga -->
+        <div class="series-card floating" id="multiversal-saga">
+          <img
+            src="images/multiverss.avif"
+            alt="Multiversal Saga"
+            class="series-image"
+          />
+          <div class="series-title">MULTIVERSAL SAGA</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about-section" class="hidden">
+      <button class="back-button" id="back-to-home-from-about">
+        BACK TO HOME
+      </button>
+      <div class="about-section comic-border">
+        <h2>ABOUT MARVELVERSE</h2>
+        <p>
+          Welcome to MarvelVerse, your ultimate destination for all things
+          Marvel Comics! We're passionate about bringing you the latest and
+          greatest from the Marvel Universe.
+        </p>
+        <p>
+          Our mission is to create a community where fans can explore, discover,
+          and discuss their favorite Marvel characters, stories, and creators.
+          Whether you're a long-time collector or new to the world of comics,
+          MarvelVerse has something for everyone.
+        </p>
+        <p>
+          Dive into our extensive collection of comics, learn about iconic
+          characters, and explore the epic sagas that have shaped the Marvel
+          Universe over the decades.
+        </p>
+      </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact-section" class="hidden">
+      <button class="back-button" id="back-to-home-from-contact">
+        BACK TO HOME
+      </button>
+      <div class="contact-section comic-border">
+        <h2>CONTACT US</h2>
+        <form class="contact-form">
+          <div class="form-group">
+            <label for="name">YOUR NAME:</label>
+            <input type="text" id="name" name="name" required />
+          </div>
+          <div class="form-group">
+            <label for="email">YOUR EMAIL:</label>
+            <input type="email" id="email" name="email" required />
+          </div>
+          <div class="form-group">
+            <label for="subject">SUBJECT:</label>
+            <input type="text" id="subject" name="subject" required />
+          </div>
+          <div class="form-group">
+            <label for="message">YOUR MESSAGE:</label>
+            <textarea id="message" name="message" required></textarea>
+          </div>
+          <button type="submit" class="submit-btn">SEND MESSAGE</button>
+        </form>
+      </div>
+    </section>
+
+    <!-- Infinity Saga Comics -->
+    <section id="infinity-saga-comics" class="hidden">
+      <button class="back-button" id="back-to-series-from-infinity">
+        BACK TO SERIES
+      </button>
+      <section class="hero-section comic-border">
+        <h2 class="hero-title">INFINITY SAGA COMICS</h2>
+      </section>
+
+      <div class="comic-grid">
+        <div class="comic-card floating">
+          <span class="comic-badge">CLASSIC</span>
+          <img
+            src="images/infinity 1.jpg"
+            alt="Infinity Gauntlet"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Infinity Gauntlet</h3>
+            <p class="comic-meta">Written by Jim Starlin</p>
+            <p class="comic-meta">Art by George Pérez</p>
+          </div>
+        </div>
+        <div class="comic-card floating">
+          <img
+            src="images/Avengers.jpg"
+            alt="Thanos Quest"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Avengers Diassembled</h3>
+            <p class="comic-meta">Written by Jim Starlin</p>
+            <p class="comic-meta">Art by Ron Lim</p>
+          </div>
+        </div>
+
+        <div class="comic-card floating">
+          <img
+            src="images/Avengers Infinity Gauntlet.jpg"
+            alt="Infinity War"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Infinity War</h3>
+            <p class="comic-meta">Written by Jim Starlin</p>
+            <p class="comic-meta">Art by Ron Lim</p>
+          </div>
+        </div>
+
+        <div class="comic-card floating">
+          <span class="comic-badge">EPIC</span>
+          <img
+            src="images/infinity 3.jpg"
+            alt="Infinity Crusade"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Infinity Crusade</h3>
+            <p class="comic-meta">Written by Jim Starlin</p>
+            <p class="comic-meta">Art by Ron Lim</p>
+          </div>
+        </div>
+
+        <div class="comic-card floating">
+          <img
+            src="images/infinity 4.jpg"
+            alt="Thanos Quest"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Thanos Quest</h3>
+            <p class="comic-meta">Written by Jim Starlin</p>
+            <p class="comic-meta">Art by Ron Lim</p>
+          </div>
+        </div>
+
+        <div class="comic-card floating">
+          <span class="comic-badge">CONCLUSION</span>
+          <img src="images/infinity 6.jpg" alt="The End" class="comic-cover" />
+          <div class="comic-info">
+            <h3 class="comic-title">The Thanos: The End</h3>
+            <p class="comic-meta">Written by Jim Starlin</p>
+            <p class="comic-meta">Art by Jim Starlin</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Multiversal Saga Comics -->
+    <section id="multiversal-saga-comics" class="hidden">
+      <button class="back-button" id="back-to-series-from-multiverse">
+        BACK TO SERIES
+      </button>
+      <section class="hero-section comic-border">
+        <h2 class="hero-title">MULTIVERSAL SAGA COMICS</h2>
+      </section>
+
+      <div class="comic-grid">
+        <div class="comic-card floating">
+          <span class="comic-badge">NEW!</span>
+          <img src="images/multi 1.jpg" alt="Secret Wars" class="comic-cover" />
+          <div class="comic-info">
+            <h3 class="comic-title">Secret Wars (2015)</h3>
+            <p class="comic-meta">Written by Jonathan Hickman</p>
+            <p class="comic-meta">Art by Esad Ribić</p>
+          </div>
+        </div>
+
+        <div class="comic-card floating">
+          <img
+            src="images/multi 2.jpg"
+            alt="Spider-Verse"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Spider-Verse</h3>
+            <p class="comic-meta">Written by Dan Slott</p>
+            <p class="comic-meta">Art by Olivier Coipel</p>
+          </div>
+        </div>
+
+        <div class="comic-card floating">
+          <span class="comic-badge">EPIC</span>
+          <img
+            src="images/multi 3.jpg"
+            alt="Secret Wars 1984"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Secret Wars (1984)</h3>
+            <p class="comic-meta">Written by Jim Shooter</p>
+            <p class="comic-meta">Art by Mike Zeck</p>
+          </div>
+        </div>
+
+        <div class="comic-card floating">
+          <img
+            src="images/Fantastic Four By Mark Waid and Mike Wieringo.jpg"
+            alt="Exiles"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Fantastic Four</h3>
+            <p class="comic-meta">Written by Judd Winick</p>
+            <p class="comic-meta">Art by Jim Calafiore</p>
+          </div>
+        </div>
+
+        <div class="comic-card floating">
+          <img src="images/Dr. Doom.jpg" alt="Exiles" class="comic-cover" />
+          <div class="comic-info">
+            <h3 class="comic-title">Doctor Doom v02 - Bedford Falls</h3>
+            <p class="comic-meta">Written by Judd Winick</p>
+            <p class="comic-meta">Art by Jim Calafiore</p>
+          </div>
+        </div>
+
+        <div class="comic-card floating">
+          <span class="comic-badge">CONCLUSION</span>
+          <img
+            src="images/multi 5.jpg"
+            alt="Ultimate End"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Ultimate End</h3>
+            <p class="comic-meta">Written by Brian Michael Bendis</p>
+            <p class="comic-meta">Art by Mark Bagley</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Character Comics Sections -->
+    <!-- Iron Man Comics -->
+    <section id="iron-man-comics" class="hidden">
+      <button class="back-button" id="back-to-characters-from-ironman">
+        BACK TO CHARACTERS
+      </button>
+      <section class="hero-section comic-border">
+        <h2 class="hero-title">IRON MAN COMICS</h2>
+      </section>
+
+      <div class="comic-grid">
+        <div class="comic-card floating ironman-comic">
+          <span class="comic-badge">NEW!</span>
+          <img
+            src="images/Iron man_Extremes.jpg"
+            alt="Iron Man 1"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Iron Man: Extremis</h3>
+            <p class="comic-meta">Written by Warren Ellis</p>
+            <p class="comic-meta">Art by Adi Granov</p>
+          </div>
+        </div>
+
+        <div class="comic-card floating ironman-comic">
+          <img
+            src="images/invincible iron man.jpg"
+            alt="Iron Man 2"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Invincible Iron Man</h3>
+            <p class="comic-meta">Written by Matt Fraction</p>
+            <p class="comic-meta">Art by Salvador Larroca</p>
+          </div>
+        </div>
+
+        <div class="comic-card floating ironman-comic">
+          <span class="comic-badge">CLASSIC</span>
+          <img
+            src="images/Iron man - demon in a bottlw.jpg"
+            alt="Iron Man 3"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Iron Man: Demon in a Bottle</h3>
+            <p class="comic-meta">Written by David Michelinie</p>
+            <p class="comic-meta">Art by Bob Layton</p>
+          </div>
+        </div>
+
+        <div class="comic-card floating ironman-comic">
+          <img
+            src="images/iron man armor wars.jpg"
+            alt="Iron Man 4"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Iron Man: Armor Wars</h3>
+            <p class="comic-meta">Written by David Michelinie</p>
+            <p class="comic-meta">Art by Bob Layton</p>
+          </div>
+        </div>
+
+        <div class="comic-card floating ironman-comic">
+          <span class="comic-badge">LEGENDARY</span>
+          <img
+            src="images/iron man 5.jpg"
+            alt="Iron Man 5"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Iron Man: Extremis</h3>
+            <p class="comic-meta">Written by Warren Ellis</p>
+            <p class="comic-meta">Art by Adi Granov</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Thor Comics -->
+    <section id="thor-comics" class="hidden">
+      <button class="back-button" id="back-to-characters-from-thor">
+        BACK TO CHARACTERS
+      </button>
+      <section class="hero-section comic-border">
+        <h2 class="hero-title">THOR COMICS</h2>
+      </section>
+
+      <div class="comic-grid">
+        <div class="comic-card floating thor-comic">
+          <span class="comic-badge">NEW!</span>
+          <img
+            src="images/thor god of thunder.jpg"
+            alt="Thor 1"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Thor: God of Thunder</h3>
+            <p class="comic-meta">Written by Jason Aaron</p>
+            <p class="comic-meta">Art by Esad Ribić</p>
+          </div>
+        </div>
+
+        <div class="comic-card floating thor-comic">
+          <img
+            src="images/the mighty thor.jpg"
+            alt="Thor 2"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">The Mighty Thor</h3>
+            <p class="comic-meta">Written by Walter Simonson</p>
+            <p class="comic-meta">Art by Walter Simonson</p>
+          </div>
+        </div>
+
+        <div class="comic-card floating thor-comic">
+          <span class="comic-badge">CLASSIC</span>
+          <img
+            src="images/thor ragnarok.jpg"
+            alt="Thor 3"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Thor: Ragnarok</h3>
+            <p class="comic-meta">Written by Michael Avon Oeming</p>
+            <p class="comic-meta">Art by Andrea DiVito</p>
+          </div>
+        </div>
+
+        <div class="comic-card floating thor-comic">
+          <img src="images/thor vikings.jpg" alt="Thor 4" class="comic-cover" />
+          <div class="comic-info">
+            <h3 class="comic-title">Thor: Vikings</h3>
+            <p class="comic-meta">Written by Garth Ennis</p>
+            <p class="comic-meta">Art by Glenn Fabry</p>
+          </div>
+        </div>
+
+        <div class="comic-card floating thor-comic">
+          <span class="comic-badge">LEGENDARY</span>
+          <img src="images/surturcover.webp" alt="Thor 5" class="comic-cover" />
+          <div class="comic-info">
+            <h3 class="comic-title">Thor: Surtur Rising</h3>
+            <p class="comic-meta">Written by Matt Fraction</p>
+            <p class="comic-meta">Art by Pasqual Ferry</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Captain America Comics -->
+    <section id="captain-america-comics" class="hidden">
+      <button class="back-button" id="back-to-characters-from-captain-america">
+        BACK TO CHARACTERS
+      </button>
+      <section class="hero-section comic-border">
+        <h2 class="hero-title">CAPTAIN AMERICA COMICS</h2>
+      </section>
+
+      <div class="comic-grid">
+        <div class="comic-card floating captain-comic">
+          <span class="comic-badge">NEW!</span>
+          <img
+            src="images/captain winter soldier.jpg"
+            alt="Captain America 1"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Captain America: Winter Soldier</h3>
+            <p class="comic-meta">Written by Ed Brubaker</p>
+            <p class="comic-meta">Art by Steve Epting</p>
+          </div>
+        </div>
+
+        <div class="comic-card floating captain-comic">
+          <img
+            src="images/captain 2.jpg"
+            alt="Captain America 2"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Captain America: Man Out of Time</h3>
+            <p class="comic-meta">Written by Mark Waid</p>
+            <p class="comic-meta">Art by Jorge Molina</p>
+          </div>
+        </div>
+
+        <div class="comic-card floating captain-comic">
+          <span class="comic-badge">CLASSIC</span>
+          <img
+            src="images/captain first avenger.jpg"
+            alt="Captain America 3"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Captain America: The First Avenger</h3>
+            <p class="comic-meta">Written by Joe Simon</p>
+            <p class="comic-meta">Art by Jack Kirby</p>
+          </div>
+        </div>
+
+        <div class="comic-card floating captain-comic">
+          <img
+            src="images/captain reborn.jpg"
+            alt="Captain America 4"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Captain America: Reborn</h3>
+            <p class="comic-meta">Written by Ed Brubaker</p>
+            <p class="comic-meta">Art by Bryan Hitch</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Spider-Man Comics -->
+    <section id="spider-man-comics" class="hidden">
+      <button class="back-button" id="back-to-characters-from-spider-man">
+        BACK TO CHARACTERS
+      </button>
+      <section class="hero-section comic-border">
+        <h2 class="hero-title">SPIDER-MAN COMICS</h2>
+      </section>
+
+      <div class="comic-grid">
+        <div class="comic-card floating spiderman-comic">
+          <span class="comic-badge">NEW!</span>
+          <img
+            src="images/spiderman 1.jpg"
+            alt="Spider-Man 1"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">The Amazing Spider-Man</h3>
+            <p class="comic-meta">Written by Warren Ellis</p>
+            <p class="comic-meta">Art by Adi Granov</p>
+          </div>
+        </div>
+
+        <div class="comic-card floating spiderman-comic">
+          <img
+            src="images/web of spider man.jpg"
+            alt="Spider-Man 2"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Web of Spider-Man</h3>
+            <p class="comic-meta">Written by Matt Fraction</p>
+            <p class="comic-meta">Art by Salvador Larroca</p>
+          </div>
+        </div>
+
+        <div class="comic-card floating spiderman-comic">
+          <span class="comic-badge">CLASSIC</span>
+          <img
+            src="images/spider 3.jpg"
+            alt="Spider-Man 3"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Spider-Man: Blue</h3>
+            <p class="comic-meta">Written by Jeph Loeb</p>
+            <p class="comic-meta">Art by Tim Sale</p>
+          </div>
+        </div>
+
+        <div class="comic-card floating spiderman-comic">
+          <img
+            src="images/spider 4.jpg"
+            alt="Spider-Man 4"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Spider-Man: Kraven's Last Hunt</h3>
+            <p class="comic-meta">Written by J.M. DeMatteis</p>
+            <p class="comic-meta">Art by Mike Zeck</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Doctor Doom Comics -->
+    <section id="doctor-doom-comics" class="hidden">
+      <button class="back-button" id="back-to-characters-from-doom">
+        BACK TO CHARACTERS
+      </button>
+      <section class="hero-section comic-border">
+        <h2 class="hero-title">DOCTOR DOOM COMICS</h2>
+      </section>
+
+      <div class="comic-grid">
+        <div class="comic-card floating doom-comic">
+          <span class="comic-badge">NEW</span>
+          <img
+            src="images/Dr. Doom.jpg"
+            alt="Doctor Doom 1"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Doctor Doom v02 - Bedford Falls (2021)</h3>
+            <p class="comic-meta">Written by Jason Aaron</p>
+            <p class="comic-meta">Art by Pablo Raimondi</p>
+          </div>
+        </div>
+
+        <div class="comic-card floating doom-comic">
+          <img
+            src="images/doom 2.jpg"
+            alt="Doctor Doom 2"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Doctor Doom: Triumph and Torment</h3>
+            <p class="comic-meta">Written by Roger Stern</p>
+            <p class="comic-meta">Art by Mike Mignola</p>
+          </div>
+        </div>
+
+        <div class="comic-card floating doom-comic">
+          <span class="comic-badge">EPIC</span>
+          <img
+            src="images/doom 3.jpg"
+            alt="Doctor Doom 3"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Doctor Doom: The Secret Wars</h3>
+            <p class="comic-meta">Written by Jonathan Hickman</p>
+            <p class="comic-meta">Art by Esad Ribić</p>
+          </div>
+        </div>
+
+        <div class="comic-card floating doom-comic">
+          <span class="comic-badge">TRENDING</span>
+          <img
+            src="images/doom 4.jpg"
+            alt="Doctor Doom 4"
+            class="comic-cover"
+          />
+          <div class="comic-info">
+            <h3 class="comic-title">Doctor Doom: Infamous Iron Man</h3>
+            <p class="comic-meta">Written by Brian Michael Bendis</p>
+            <p class="comic-meta">Art by Alex Maleev</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      <p>© 2023 MARVELVERSE - Not affiliated with Marvel Comics</p>
+      <p>
+        All comic images and characters are property of Marvel Entertainment
+      </p>
+    </footer>
+
+    <script>
+      // Navigation functionality
+      document.getElementById("home").addEventListener("click", function (e) {
+        e.preventDefault();
+        resetTheme();
+        showSection("home-section");
+      });
+
+      document
+        .getElementById("characters")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          resetTheme();
+          showSection("characters-section");
+        });
+
+      document.getElementById("series").addEventListener("click", function (e) {
+        e.preventDefault();
+        resetTheme();
+        showSection("series-section");
+      });
+
+      document.getElementById("about").addEventListener("click", function (e) {
+        e.preventDefault();
+        resetTheme();
+        showSection("about-section");
+      });
+
+      document
+        .getElementById("contact")
+        .addEventListener("click", function (e) {
+          e.preventDefault();
+          resetTheme();
+          showSection("contact-section");
+        });
+
+      // Back buttons
+      document
+        .getElementById("back-to-home-from-characters")
+        .addEventListener("click", function () {
+          resetTheme();
+          showSection("home-section");
+        });
+
+      document
+        .getElementById("back-to-home-from-series")
+        .addEventListener("click", function () {
+          resetTheme();
+          showSection("home-section");
+        });
+
+      document
+        .getElementById("back-to-home-from-about")
+        .addEventListener("click", function () {
+          resetTheme();
+          showSection("home-section");
+        });
+
+      document
+        .getElementById("back-to-home-from-contact")
+        .addEventListener("click", function () {
+          resetTheme();
+          showSection("home-section");
+        });
+
+      // Character click handlers
+      document
+        .getElementById("iron-man")
+        .addEventListener("click", function () {
+          document.body.className = "ironman-theme";
+          showSection("iron-man-comics");
+        });
+
+      document.getElementById("thor").addEventListener("click", function () {
+        document.body.className = "thor-theme";
+        showSection("thor-comics");
+      });
+
+      document
+        .getElementById("captain-america")
+        .addEventListener("click", function () {
+          document.body.className = "captain-theme";
+          showSection("captain-america-comics");
+        });
+
+      document
+        .getElementById("spider-man")
+        .addEventListener("click", function () {
+          document.body.className = "spiderman-theme";
+          showSection("spider-man-comics");
+        });
+
+      document
+        .getElementById("doctor-doom")
+        .addEventListener("click", function () {
+          document.body.className = "doom-theme";
+          showSection("doctor-doom-comics");
+        });
+
+      // Series click handlers
+      document
+        .getElementById("infinity-saga")
+        .addEventListener("click", function () {
+          showSection("infinity-saga-comics");
+        });
+
+      document
+        .getElementById("multiversal-saga")
+        .addEventListener("click", function () {
+          showSection("multiversal-saga-comics");
+        });
+
+      // Back buttons from character comics
+      document
+        .getElementById("back-to-characters-from-ironman")
+        .addEventListener("click", function () {
+          resetTheme();
+          showSection("characters-section");
+        });
+
+      document
+        .getElementById("back-to-characters-from-thor")
+        .addEventListener("click", function () {
+          resetTheme();
+          showSection("characters-section");
+        });
+
+      document
+        .getElementById("back-to-characters-from-captain")
+        .addEventListener("click", function () {
+          resetTheme();
+          showSection("characters-section");
+        });
+
+      document
+        .getElementById("back-to-characters-from-spider-man")
+        .addEventListener("click", function () {
+          resetTheme();
+          showSection("characters-section");
+        });
+
+      document
+        .getElementById("back-to-characters-from-doom")
+        .addEventListener("click", function () {
+          resetTheme();
+          showSection("characters-section");
+        });
+
+      // Back buttons from series comics
+      document
+        .getElementById("back-to-series-from-infinity")
+        .addEventListener("click", function () {
+          showSection("series-section");
+        });
+
+      document
+        .getElementById("back-to-series-from-multiverse")
+        .addEventListener("click", function () {
+          showSection("series-section");
+        });
+
+      // Helper functions
+      function resetTheme() {
+        document.body.className = "";
+      }
+
+      function showSection(sectionId) {
+        // Hide all sections
+        document
+          .querySelectorAll('section[id$="-section"], section[id$="-comics"]')
+          .forEach((section) => {
+            section.classList.add("hidden");
+          });
+
+        // Show requested section
+        document.getElementById(sectionId).classList.remove("hidden");
+      }
+    </script>
+  </body>
+</html>
